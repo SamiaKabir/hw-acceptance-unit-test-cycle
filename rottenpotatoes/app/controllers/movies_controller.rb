@@ -30,7 +30,16 @@ class MoviesController < ApplicationController
       session[:ratings] = @selected_ratings
       redirect_to :sort => sort, :ratings => @selected_ratings and return
     end
+    
+#    @select_director= params[:select]||session[:select] || {}
     @movies = Movie.where(rating: @selected_ratings.keys).order(ordering)
+#   @movies.merge!(Movie.where(director: @select))
+
+#    if params[:select]
+#        @movies = Movie.where(rating: @selected_ratings.keys,director: @select).order(ordering)
+#    else
+#       @movies = Movie.where(rating: @selected_ratings.keys).order(ordering)
+#    end
   end
 
   def new
@@ -59,6 +68,20 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+  
+  # find movies with same director
+  def director_select
+      movie = Movie.find(params[:id])
+      director_name = movie.director
+      
+      if not director_name or director_name.empty?
+          flash[:notice] = %Q{'#{movie.title}' has no director info}
+          redirect_to movies_path
+          else
+          @movies = Movie.where(director:director_name)
+          flash[:notice] = %Q{There are #{@movies.size} movie(s) with "#{director_name}" as director}
+      end
   end
 
 end
