@@ -4654,3 +4654,44 @@ Processing by MoviesController#index as HTML
   [1m[35mMovie Load (0.3ms)[0m  SELECT "movies".* FROM "movies" WHERE "movies"."rating" IN ('G', 'NC-17', 'PG', 'PG-13')  ORDER BY "movies"."release_date" ASC
   Rendered movies/index.html.haml within layouts/application (2.5ms)
 Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2019-03-07 23:28:15 -0600
+
+
+Started GET "/movies" for ::1 at 2019-03-07 23:28:16 -0600
+Processing by MoviesController#index as HTML
+Redirected to http://localhost:3000/movies?ratings%5BG%5D=1&ratings%5BNC-17%5D=1&ratings%5BPG%5D=1&ratings%5BPG-13%5D=1&sort=release_date
+Completed 302 Found in 22ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/movies?ratings%5BG%5D=1&ratings%5BNC-17%5D=1&ratings%5BPG%5D=1&ratings%5BPG-13%5D=1&sort=release_date" for ::1 at 2019-03-07 23:28:16 -0600
+Processing by MoviesController#index as HTML
+  Parameters: {"ratings"=>{"G"=>"1", "NC-17"=>"1", "PG"=>"1", "PG-13"=>"1"}, "sort"=>"release_date"}
+  [1m[36mMovie Load (0.1ms)[0m  [1mSELECT "movies".* FROM "movies" WHERE "movies"."rating" IN ('G', 'NC-17', 'PG', 'PG-13')  ORDER BY "movies"."release_date" ASC[0m
+  Rendered movies/index.html.haml within layouts/application (14.7ms)
+Completed 500 Internal Server Error in 182ms (ActiveRecord: 1.3ms)
+
+ActionView::Template::Error (couldn't find file 'turbolinks' with type 'application/javascript'
+Checked in these paths: 
+  /Users/samiakabir/Documents/GitHub/hw-acceptance-unit-test-cycle/app/assets/images
+  /Users/samiakabir/Documents/GitHub/hw-acceptance-unit-test-cycle/app/assets/javascripts
+  /Users/samiakabir/Documents/GitHub/hw-acceptance-unit-test-cycle/app/assets/stylesheets
+  /Users/samiakabir/Documents/GitHub/hw-acceptance-unit-test-cycle/vendor/assets/stylesheets
+  /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/jquery-rails-4.1.1/vendor/assets/javascripts
+  /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/coffee-rails-4.1.1/lib/assets/javascripts):
+    2: %html
+    3:   %head
+    4:     %title Rotten Potatoes!
+    5:     = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
+    6:     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    7:     = csrf_meta_tags
+    8: 
+  app/assets/javascripts/application.js:15
+  app/views/layouts/application.html.haml:5:in `_app_views_layouts_application_html_haml__1275678898897153575_70158488109060'
+
+
+  Rendered /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.9ms)
+  Rendered /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (9.2ms)
+  Rendered /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/samiakabir/.rvm/gems/ruby-2.4.0/gems/actionpack-4.2.10/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (81.5ms)

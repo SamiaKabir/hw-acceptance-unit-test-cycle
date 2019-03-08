@@ -7,14 +7,12 @@
     = csrf_meta_tags
 
   %body
-    %div.navbar.navbar-expand-lg.bg-primary.text-white
       %h1.title Rotten Potatoes!
     #main
       - if flash[:notice]
         %div.alert.alert-danger
           #notice.message= flash[:notice]
       - elsif flash[:warning]
-        %div.alert.alert-danger
           #warning.message= flash[:warning]
 
       = yield
